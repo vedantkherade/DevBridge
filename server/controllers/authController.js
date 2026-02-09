@@ -66,3 +66,12 @@ export const login = async (req, res, next) => {
         next(err)
     }
 }
+
+//we use samesite to bc the ports are different in client and server
+
+export const logout = async (req, res) => {
+    res.clearCookie("accessToken",{
+        sameSite:"none",
+        source: true
+    }).status(200).send("User has been logged out");
+}
