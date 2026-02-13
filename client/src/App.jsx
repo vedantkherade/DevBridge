@@ -16,14 +16,20 @@ import MyGigs from "./pages/myGigs/MyGigs";
 
 
 
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
 // in place of the Outlet you can view any page mentioned inside the router
 function App() {
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar />
-        <Outlet />
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+            <Navbar />
+            <Outlet />
+            <Footer />
+        </QueryClientProvider>
       </div>
     );
   };

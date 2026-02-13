@@ -47,22 +47,43 @@ export const getGig = async(req, res, next) => {
     }
 }
 
-export const getGigs = async(req, res, next) => {
-   
-    const q = req.query;
+export const getGigs = async (req, res, next) => {
+  const q = req.query;
 
-   // $options: "i" for case insensitive
-    const filters = {
-        cat : q.cat,
-        price: {$gt: 0},
-        title: {$regex: q.search, $options: "i"}
-    }
+  // $options: "i" for case insensitive
+  const filters = {
+    ...(q.userId && { userId: q.userId }),
+    ...(q.cat && { cat: q.cat }),
+    ...((q.min || q.max) && {
+      price: {
+        ...(q.min && { $gt: q.min }),
+        ...(q.max && { $lt: q.max }),
+      },
+    }),
 
-    try{
-        const gigs = await Gig.find(filters)
-        res.status(200).send(gigs);
+    ...(q.search && {
+      title: {
+        $regex: q.search,
+        $options: "i",
+      },
+    }),
+  };
 
-    }catch(err){
-        next(err);
-    }
-}
+//   try {
+//     const gigs = await Gig.find(filters);
+//     res.status(200).send(gigs);
+//   } catch (err) {
+//     next(err);
+//   }
+
+  const allowedSortFields = ["price", "createdAt", "rating"];
+  const sortField = allowedSortFields.includes(q.sort) ? q.sort : "createdAt";
+  try {
+    const gigs = await Gig.find(filters).sort({ [sortField]: -1 });
+    res.status(200).send(gigs);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
