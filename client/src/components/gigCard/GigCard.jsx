@@ -9,7 +9,7 @@ const GigCard = ({ item }) => {
 
   const {isLoading, error, data, refetch} = useQuery({
     queryKey: [`${item.userId}`],
-    queryFn: () => newRequest.get(`/users/${item.userId}`)
+    queryFn: () => newRequest.get(`/user/${item.userId}`)
     .then(res => res.data)
   
   });
@@ -19,7 +19,7 @@ const GigCard = ({ item }) => {
 
 
   return (
-    <Link to="/gig/123" className="link">
+    <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
         <img src={item.cover} alt="" />
         <div className="info">
