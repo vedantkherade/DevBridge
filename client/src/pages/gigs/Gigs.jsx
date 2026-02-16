@@ -47,7 +47,7 @@ function Gigs() {
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">Hirely > Graphics & Design ></span>
+        <span className="breadcrumbs">Hirely {">"} Graphics & Design {">"}</span>
         <h1>AI Artists</h1>
         <p>
           Explore the boundaries of art and technology with Hirely's AI artists

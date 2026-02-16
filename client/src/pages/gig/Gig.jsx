@@ -9,6 +9,8 @@ import "react-multi-carousel/lib/styles.css"; // Add this CSS import
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useParams } from "react-router-dom";
+import Reviews from "../../components/reviews/Reviews";
+
 
 function Gig() {
 
@@ -175,9 +177,10 @@ const userId = data?.userId;
             </div>
            ) : null}
          
+          
+          <Reviews gigId = {id}/>
 
-
-          <div className="reviews">
+          {/* <div className="reviews">
             <h2>Reviews</h2>
             <div className="item">
               <div className="user">
@@ -304,7 +307,7 @@ const userId = data?.userId;
                 <span>No</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
 
