@@ -17,6 +17,8 @@ import MyGigs from "./pages/myGigs/MyGigs";
 
 
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import ForgetPassword from "./pages/forgetPassword/ForgetPassword";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -81,6 +83,17 @@ function App() {
       path: "/login",
       element: <Login />,
     },
+
+    {
+      path: "/forget-password",
+      element: <ForgetPassword/>,
+    },
+    {
+      path: "/reset-password/:token",
+      element: <ResetPassword/>
+    }
+
+
   ]);
 
   return <RouterProvider router={router} />;

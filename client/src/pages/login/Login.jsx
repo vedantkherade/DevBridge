@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import newRequest from "../../utils/newRequest";
 
@@ -62,6 +62,8 @@ function Login() {
         />
         <button type="submit">Login</button>
         {error && error}
+
+        <Link to='/forget-password'>Forget Password</Link>
       </form>
     </div>
   );
