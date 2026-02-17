@@ -2,6 +2,8 @@ import User from "../models/userModel.js";
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 import createError from "../utils/createError.js";
+import sendEmail from "../utils/sendEmail.js";
+import crypto from "crypto";
 
 export const register = async(req, res, next) => {
     try{
@@ -74,4 +76,24 @@ export const logout = async (req, res) => {
         sameSite:"none",
         source: true
     }).status(200).send("User has been logged out");
+}
+
+
+export const forgetPassword = async (req, res, next) => {
+    try{
+        const user = await User.findOne({
+            email: req.body.email
+        });
+
+        if(!user) return next(createError(404, "User not found!"));
+
+
+    }catch(err){
+        next(err);
+    }
+}
+
+
+export const resetPassword = async (req, res, next) => {
+    res.status(200).send("Please check your email");
 }
